@@ -1,0 +1,85 @@
+<div class="text-center" *ngIf="errorService">
+  <h1 style="font-size: 18px; padding: 16px 16px 16px">
+    Estamos presentando fallas en el sistema, intentelo denuevo o mas tarde
+  </h1>
+</div>
+
+<table
+  class="table table-striped text-center"
+  style="width: 90%; margin: 0 auto"
+  *ngIf="!errorService"
+>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Activo</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Detalle</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let p of people | searchFilter: searchText">
+    <tr>
+      <th scope="row">{{ p.id }}</th>
+      <td>{{ p.activo }}</td>
+      <td>{{ p.nombre }}</td>
+      <td>{{ p.apellido }}</td>
+      <td>
+        <button class="btn btn-outline-info" (click)="open(mymodal, p)">
+          Mas Información
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-titlen">Detalles del Trabajador</h4>
+  </div>
+  <img src="./assets/img/img_avatar.png" alt="Avatar" class="avatar" />
+  <div class="modal-body">
+    <div class="container">
+      <div class="row mb-2">
+        <div class="col title">Telefono</div>
+        <div class="col text">{{ data.telefono }}</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col title">
+          Rut
+          <br />
+          <span class="error" *ngIf="error.rut">
+            formato de rut con errores
+          </span>
+        </div>
+        <div class="col text">{{ data.rut }}</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col title">
+          Fecha Nacimiento
+          <br />
+          <span class="error" *ngIf="error.date">
+            formato de fecha con errores
+          </span>
+        </div>
+        <div class="col text">{{ data.fechaNacimiento }}</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col title">Direccion</div>
+        <div class="col text">
+          {{ data.direccion.calle }} #{{ data.direccion.numero }}
+          {{ data.direccion.comuna }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Ok
+    </button>
+  </div>
+</ng-template>
