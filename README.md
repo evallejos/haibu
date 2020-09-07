@@ -25,7 +25,11 @@ descarga el proyecto en tu pc local ejecutando el comando en tu consola "git clo
 
 npm install para descargar y crear la carpeta node_modules
 
-una vez que termine la descarga corre el servidor de angular con el comando
+una vez que termine la descarga
+
+busca el directorio donde descargaste el proyecto
+
+y ejecuta el comando
 
 ng serve --open
 
